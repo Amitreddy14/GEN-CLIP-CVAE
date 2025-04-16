@@ -29,17 +29,17 @@ a) bucolic (relating to pastoral life, i.e. filtering for “cow”, “sheep”
 b) naturey (relating to broader natural terms like “grass”, “mountain”, “hillside”, etc.).
 
 ## Methodology
-We train a VAE (consisting of multiple encoders and a decoder) on MS-COCO with reconstruction and KL-divergence loss. We condition by concatenating either CLIP image encodings or caption encodings to the output of the encoder (which processed the original image). For generation, we concatenate the CLIP text encoding of the prompt to noise and feed this to the decoder. 
+We train a VAE (consisting of multiple encoders and a decoder) on MS-COCO with reconstruction and KL-divergence loss. We condition by concatenating either CLIP image encodings or caption encodings to the output of the encoder (which processed the original image). For generation, I concatenate the CLIP text encoding of the prompt to noise and feed this to the decoder. 
 
 ## Metrics
-Given this task is intrinsically a generative task, it is difficult to find a very clear metric for accuracy. We use our model's loss to track whether the model learns, but assessment of its performance is primarily qualitative.
+Given this task is intrinsically a generative task, it is difficult to find a very clear metric for accuracy. I use our model's loss to track whether the model learns, but assessment of its performance is primarily qualitative.
 
 In the original unCLIP paper, the authors use a similar process and assess the model's performance using human evaluation. Participants are asked to assess Photorealism, Caption Similarity, and Diversity. They primarily compare two versions of their model: one which derives embeddings autoregressively from the CLIP embeddings, and one involving a diffusion model. It seems like the authors were trying to outperform GLIDE, which they did for certain assessments and for certain guidance scales. For reference, this parameter assesses the influence of the guiding mechanism during the diffusion process.
 
 ## Ethics
 - Why is Deep Learning a good approach to this problem?
 
-It is difficult to imagine how a procedural algorithm could generate an image from a prompt. It would be virtually impossible to capture the immense diversity of possible words and prompts, and also the diversity in variations of output images from the same prompt. This task of identifying features in a given image is itself complex (but algorithms exist for that, like bag of words), but the task of directly linking visual representation and textual representation is even more substantial and difficult to achieve. The deep inferences that a deep model is able to make are crucial, and this is why we think Deep Learning is a good approach to the problem.
+It is difficult to imagine how a procedural algorithm could generate an image from a prompt. It would be virtually impossible to capture the immense diversity of possible words and prompts, and also the diversity in variations of output images from the same prompt. This task of identifying features in a given image is itself complex (but algorithms exist for that, like bag of words), but the task of directly linking visual representation and textual representation is even more substantial and difficult to achieve. The deep inferences that a deep model is able to make are crucial, and this is why I think Deep Learning is a good approach to the problem.
 
 - What broader societal issues are relevant to your chosen problem space?
 
