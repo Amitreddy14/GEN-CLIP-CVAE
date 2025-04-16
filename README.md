@@ -7,7 +7,7 @@ Work inspired by the full text-conditional image generation stack introduced in 
 - The bulk of the code I run is in the Google Colab notebooks, which I have included copies of in the `final_notebooks/` directory. The names of the notebooks should outline what dimensions of images I was training or testing the model on, and different properties (dropout vs. no drouput, etc.)
 
 ### Python Modules and Scripts
-We make use of three main modules or scripts we wrote:
+We make use of three main modules or scripts I wrote:
 - `clip_wrapper.py` contains a few functions dedicated to interacting with the `clip` Python library. It provides convenient methods to obtain image or text embeddings.
 - `preprocess.py` contains our preprocessing code. It contains a few methods to obtain a Tensorflow Dataset of Image/Embedding pairs. We incldued multiple methods, that allow us to get either 64x64 and 128x128 images, and their image or text embeddings. 
 - `offline_preprocess.py` is a Python script designed to be run offline to prepare the dataset, even before preprocessing. It is this script that narrows down the set of images in the training dataset to bucolic-themed images. This script was a necessity due to the MS COCO training dataset being too large to unzip in Google Colab. Note that the ZIP files referenced there can be found on the original MS COCO website, [here](https://cocodataset.org/#download).
@@ -17,7 +17,7 @@ Note: Two other Python files, `model_64x64.py` and `model_128x128.py` include co
 ## Introduction
 Contrastive Language Image Pretraining (CLIP)  opens up vast possibilities for multimodal learning by producing an aligned representation of text and image data in a shared latent space. Not only has this model demonstrated impressive zero-shot capabilities, but has been incorporated as an effective image encoder in Vision-Language Models (VLMs) which perform tasks such as visual question and answering, object detection, etc .  
 
-In the context of Diffusion model-based generation, the paper "Hierarchical Text-Conditional Image Generation with CLIP Latents," presented the method of conditioning on CLIP embeddings. Instead of employing a computationally intensive diffusion model, our group chose to explore integrating CLIP embeddings with a Variational Autoencoder (VAE). We experiment with various image sizes, architectures, and CLIP encoding modes (image embeddings vs. text embeddings). 
+In the context of Diffusion model-based generation, the paper "Hierarchical Text-Conditional Image Generation with CLIP Latents," presented the method of conditioning on CLIP embeddings. Instead of employing a computationally intensive diffusion model, our group chose to explore integrating CLIP embeddings with a Variational Autoencoder (VAE). I experiment with various image sizes, architectures, and CLIP encoding modes (image embeddings vs. text embeddings). 
 
 ## Related Work
 - [The paper introducing unCLIP](https://arxiv.org/pdf/2204.06125.pdf), a powerful CLIP-conditioned generative diffusion model which inspired us to apply the basic principle to VAEs. 
