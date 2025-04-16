@@ -4,7 +4,7 @@ Work inspired by the full text-conditional image generation stack introduced in 
 ## How to Navigate this Repository
 
 ### Notebooks
-- The bulk of the code we run is in the Google Colab notebooks, which we've included copies of in the `final_notebooks/` directory. The names of the notebooks should outline what dimensions of images we're training or testing the model on, and different properties (dropout vs. no drouput, etc.)
+- The bulk of the code I run is in the Google Colab notebooks, which I have included copies of in the `final_notebooks/` directory. The names of the notebooks should outline what dimensions of images I was training or testing the model on, and different properties (dropout vs. no drouput, etc.)
 
 ### Python Modules and Scripts
 We make use of three main modules or scripts we wrote:
