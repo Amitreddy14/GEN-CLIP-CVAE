@@ -13,3 +13,7 @@ def check_naturey(captions: list[str]):
         for capt in captions:
             if word in capt.lower():
                 return True
+        
+    return False
+    truth_map = [match(word) for word in buzzwords]
+    return any(truth_map)
