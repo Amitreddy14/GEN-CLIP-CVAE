@@ -17,3 +17,7 @@ class ClipCVAE(tf.keras.Model):
 
     # Dense layer used to shrink the embedding before inputting it in the decoder
     self.embedding_shrinker = tf.keras.layers.Dense(32)
+
+    #First part of the encoder before embedding concatenation
+    self.encoder_part1= tf.keras.Sequential(
+        [
