@@ -11,3 +11,8 @@ large_buzzwords = ["cow", "sheep", "mountain", "hill", "countryside", "grass", "
 def check_naturey(captions: list[str], is_small: bool):
     """Returns true if a caption for this image has one of our buzz words, false otherwise"""
     buzzwords = small_buzzwords if is_small else large_buzzwords
+
+    def match(word):
+        for capt in captions:
+            if word in capt.lower():
+                return True
