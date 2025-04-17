@@ -17,3 +17,9 @@ def check_naturey(captions: list[str]):
     return False
     truth_map = [match(word) for word in buzzwords]
     return any(truth_map)
+
+def load_coco_data(image_directory, captions_file):
+    # Tokens to be matched
+    toks = ["cow", "sheep", "cows", "sheeps"]
+
+    print("huh?")
