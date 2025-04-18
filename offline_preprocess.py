@@ -39,3 +39,8 @@ def load_coco_data(image_directory, captions_file):
       annotations = [ann['caption'] for ann in coco_captions.loadAnns(coco_captions.getAnnIds(imgIds=img['id'], iscrowd=None))]
       if check_naturey(annotations):
         to_be_moved.append(full_fp)
+
+    dest = os.path.join(image_directory, "../train_offline_preprocess")
+    for tbm in to_be_moved:
+       shutil.copyfile(tbm, os.path.join(dest, tbm.split("/")[-1]))
+    print("Done!")    
