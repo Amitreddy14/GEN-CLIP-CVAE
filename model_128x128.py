@@ -10,3 +10,6 @@ class ClipCVAE(tf.keras.Model):
     self.latent_dim = latent_dim
     self.shape_input = input_shape
     self.dropout_prob = dropout_rate
+
+    # Dense layer used to shrink the embedding before inputting it in the decoder
+    self.embedding_shrinker = tf.keras.layers.Dense(32)
