@@ -49,3 +49,6 @@ class ClipCVAE(tf.keras.Model):
 
     self.mu = tf.keras.layers.Dense(self.latent_dim, kernel_initializer=tf.keras.initializers.HeNormal())
     self.logv = tf.keras.layers.Dense(self.latent_dim, kernel_initializer=tf.keras.initializers.HeNormal())
+
+    self.decoder = tf.keras.Sequential(
+        [
