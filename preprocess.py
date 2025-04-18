@@ -94,4 +94,8 @@ def load_coco_data(image_directory, captions_file, is_small: bool):
         token_list = []
         for i in range(captions.shape[0]):
             token_list += [captions[i].cpu().numpy().decode()]
-        return cw.get_tokens(token_list)      
+        return cw.get_tokens(token_list)
+
+    def tf_py_function_tokens(images, clip_im_embeds, captions, clip_txt_embeds):
+        tokens = tf.py_function(get_tokens, [captions], tf.float32)
+        return images, clip_im_embeds, captions, clip_txt_embeds, tokens      
