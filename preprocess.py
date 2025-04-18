@@ -116,4 +116,9 @@ def get_64x64_images(dataset):
 def get_64x64_images_and_embeddings(dataset):
     def resize(image, clip_im_embed, captions, clip_txt_embeds, tokens):
         return tf.image.resize(image, [64, 64]), clip_im_embed
+    return dataset.map(resize)
+
+def get_128x128_images_and_embeddings(dataset):
+    def resize(image, clip_im_embed, captions, clip_txt_embeds, tokens):
+        return tf.image.resize(image, [128, 128]), clip_im_embed
     return dataset.map(resize)  
