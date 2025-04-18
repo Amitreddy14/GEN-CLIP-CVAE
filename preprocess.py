@@ -32,7 +32,12 @@ def load_coco_data(image_directory, captions_file, is_small: bool):
 
     # Get image IDs
     image_ids = coco_captions.getImgIds()
-    
+
     # Load images (get filepaths, and associate with captions)
     images = coco_captions.loadImgs(image_ids)
     filepaths_and_captions = []
+    for img in images:
+        full_fp = os.path.join(image_directory, img["file_name"])
+        annotations = [ann['caption'] for ann in coco_captions.loadAnns(coco_captions.getAnnIds(imgIds=img['id'], iscrowd=None))]
+        if check_naturey(annotations, is_small):
+            filepaths_and_captions.append((full_fp, annotations))
