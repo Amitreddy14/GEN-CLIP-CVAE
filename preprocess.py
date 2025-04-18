@@ -19,3 +19,7 @@ def check_naturey(captions: list[str], is_small: bool):
         return False
     truth_map = [match(word) for word in buzzwords]
     return any(truth_map)
+
+def load_coco_data(image_directory, captions_file, is_small: bool):
+    # Initialize COCO with annotations
+    coco_captions = COCO(captions_file)
