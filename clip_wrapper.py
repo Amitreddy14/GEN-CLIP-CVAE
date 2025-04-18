@@ -15,3 +15,9 @@ def get_image_encoding_from_filepath(filepath: str):
 def get_tokens(tokens: list[str]):
     text = clip.tokenize(tokens).to(device)
     return text.cpu().numpy()
+
+def get_text_encoding(tokens: list[str]):
+    text = clip.tokenize(tokens).to(device)
+    with torch.no_grad():
+        text_features = model.encode_text(text)
+        return text_features.cpu().numpy()
