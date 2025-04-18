@@ -9,7 +9,7 @@ import clip_wrapper
 BATCH_SIZE = 16
 class ClipCVAE(tf.keras.Model):
 
-    def __init__(self, input_shape,  latent_dim, dropout_rate):
+  def __init__(self, input_shape,  latent_dim, dropout_rate):
     super(ClipCVAE, self).__init__()
     self.latent_dim = latent_dim
     self.shape_input = input_shape
