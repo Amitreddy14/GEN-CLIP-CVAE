@@ -66,4 +66,10 @@ def load_coco_data(image_directory, captions_file, is_small: bool):
         if len(images.shape) == 3:
             return cw.batch_get_image_encodings(tf.expand_dims(images, axis=0)) 
         else:
-            return cw.batch_get_image_encodings(images)        
+            return cw.batch_get_image_encodings(images)
+
+    # py_function to use the tensors in the dataset to get the embeddings
+    def tf_py_function_clip_im_embeddings(images, captions):
+        clip_im_embeddings = tf.py_function(get_clip_im_embeddings, [images], tf.float32)
+        clip_im_embeddings.set_shape((1, 512))
+        return images, clip_im_embeddings, captions            
