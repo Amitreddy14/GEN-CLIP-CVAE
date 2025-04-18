@@ -83,3 +83,7 @@ class ClipCVAE(tf.keras.Model):
     kl_loss = -0.5 * tf.reduce_mean(tf.reduce_sum(1 + logv - tf.square(mu) - tf.exp(logv)))
     total_loss = reconstruction_loss + 0.5 * kl_loss + 0.1 * ssim_loss
     return total_loss / BATCH_SIZE
+  
+  def call(self, args, training=False):
+    x, embedding = args
+    embedding = tf.squeeze(embedding, axis=1)
