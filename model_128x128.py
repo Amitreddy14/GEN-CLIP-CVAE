@@ -31,3 +31,14 @@ class ClipCVAE(tf.keras.Model):
             tf.keras.layers.BatchNormalization(),
             tf.keras.layers.LeakyReLU(),
             tf.keras.layers.Flatten()])
+    
+    #In call, we will concatenate the output from the first part of the encoding with the CLIP embedding
+    self.encoder_part2 = tf.keras.Sequential([
+            tf.keras.layers.Dense(2048, kernel_initializer=tf.keras.initializers.HeNormal(), activation = "leaky_relu"),
+            tf.keras.layers.Dense(2048, kernel_initializer=tf.keras.initializers.HeNormal(), activation="leaky_relu"),
+            tf.keras.layers.Dense(1024, kernel_initializer=tf.keras.initializers.HeNormal()),
+            tf.keras.layers.BatchNormalization(),
+            tf.keras.layers.LeakyReLU()
+
+        ]
+    )
