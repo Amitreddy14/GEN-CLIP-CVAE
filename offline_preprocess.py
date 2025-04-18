@@ -29,3 +29,13 @@ def load_coco_data(image_directory, captions_file):
 
     # Get image IDs
     image_ids = coco_captions.getImgIds()
+
+    images = coco_captions.loadImgs(image_ids)
+    to_be_moved = []
+    print("Loading", end="")
+    for img in images:
+      print(".", end="")
+      full_fp = os.path.join(image_directory, img["file_name"])
+      annotations = [ann['caption'] for ann in coco_captions.loadAnns(coco_captions.getAnnIds(imgIds=img['id'], iscrowd=None))]
+      if check_naturey(annotations):
+        to_be_moved.append(full_fp)
