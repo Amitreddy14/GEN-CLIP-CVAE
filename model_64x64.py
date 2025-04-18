@@ -103,3 +103,16 @@ class ClipCVAE(tf.keras.Model):
     sigma = tf.math.sqrt(tf.math.exp(logv))
     eps = tf.random.normal([BATCH_SIZE, self.latent_dim])
     z = mu + tf.multiply(sigma, eps)
+
+    if training:
+      dropout_rate = self.dropout_prob
+      z = tf.nn.dropout(z, rate=dropout_rate)
+
+    embedding = self.embedding_shrinker(embedding)
+    # Concatenate z with embedding again
+    z_w_embedding = tf.concat([z, embedding], axis=-1)
+
+    # Decode!
+    res = self.decoder(z_w_embedding)
+
+    return res, mu, logv
