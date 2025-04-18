@@ -41,3 +41,10 @@ def load_coco_data(image_directory, captions_file, is_small: bool):
         annotations = [ann['caption'] for ann in coco_captions.loadAnns(coco_captions.getAnnIds(imgIds=img['id'], iscrowd=None))]
         if check_naturey(annotations, is_small):
             filepaths_and_captions.append((full_fp, annotations))
+
+    # Create a Tensorflow dataset from the filepaths and annotations
+    dataset = tf.data.Dataset.from_generator(
+        lambda: filepaths_and_captions,
+        output_types=(tf.string, tf.string),
+        output_shapes=(tf.TensorShape([]), tf.TensorShape([None]))
+    )        
