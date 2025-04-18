@@ -87,3 +87,7 @@ class ClipCVAE(tf.keras.Model):
   def call(self, args, training=False):
     x, embedding = args
     embedding = tf.squeeze(embedding, axis=1)
+
+     # First part of the encoding
+    e1 = self.encoder_part1(x)
+    e1_w_embedding = tf.concat([e1, embedding], axis=-1)
