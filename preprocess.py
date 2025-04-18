@@ -134,4 +134,12 @@ def get_64x64_images_and_5_text_embeddings(dataset):
 def get_64x64_images_and_1_text_embedding(dataset):
     def populate(image, clip_im_embeds, captions, clip_txt_embeds, tokens):
         return tf.image.resize(image, [64, 64]), clip_txt_embeds[0]
-    return dataset.map(populate)  
+    return dataset.map(populate)
+
+def get_128x128_images_and_5_text_embeddings(dataset):
+    def create_miniset(image, clip_im_embeds, captions, clip_txt_embeds, tokens):
+        miniset = tf.data.Dataset.from_tensor_slices(clip_txt_embeds)
+        def populate(clip_txt_embed):
+            return tf.image.resize(image, [128, 128]), tf.expand_dims(clip_txt_embed, axis=0)
+        return miniset.map(populate)
+    return dataset.flat_map(create_miniset)  
