@@ -70,3 +70,12 @@ class ClipCVAE(tf.keras.Model):
             tf.keras.layers.Conv2D(3, 5, strides=1, padding="same", activation="sigmoid", kernel_initializer=tf.keras.initializers.HeNormal())
         ]
     )
+
+     #Loss comning Binary Cross Entropy, KL Divergencve and Structural Similarity
+  def compute_loss(self, inputs, reconstructed, logv, mu):
+    inputs, _ = inputs
+    reconstruction_loss = tf.reduce_mean(tf.reduce_sum(tf.keras.losses.binary_crossentropy(inputs, reconstructed)))
+    ssim_loss = 1 - tf.reduce_mean(tf.image.ssim(inputs, reconstructed, max_val=1.0))
+    kl_loss = -0.5 * tf.reduce_mean(tf.reduce_sum(1 + logv - tf.square(mu) - tf.exp(logv)))
+    total_loss = reconstruction_loss + 0.5 * kl_loss + 0.1 * ssim_loss
+    return total_loss / BATCH_SIZE
