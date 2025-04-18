@@ -32,3 +32,7 @@ def load_coco_data(image_directory, captions_file, is_small: bool):
 
     # Get image IDs
     image_ids = coco_captions.getImgIds()
+    
+    # Load images (get filepaths, and associate with captions)
+    images = coco_captions.loadImgs(image_ids)
+    filepaths_and_captions = []
