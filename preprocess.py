@@ -28,4 +28,7 @@ def load_coco_data(image_directory, captions_file, is_small: bool):
     names = [p.split("/")[-1].replace(".jpg", "") for p in full_paths]
     ids_to_get = [int(n) for n in names]
 
-    
+    print("ids to get: ", ids_to_get)
+
+    # Get image IDs
+    image_ids = coco_captions.getImgIds()
