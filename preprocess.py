@@ -58,4 +58,12 @@ def load_coco_data(image_directory, captions_file, is_small: bool):
 
     # Create a dataset of ONLY images
     dataset = dataset.map(load_and_preprocess_image)
-    train_size = int(len(filepaths_and_captions)*0.75)        
+    train_size = int(len(filepaths_and_captions)*0.75)
+
+    # Define Python Function to get image embeddings (this will return a numpy array)
+    def get_clip_im_embeddings(images):
+        # If single image
+        if len(images.shape) == 3:
+            return cw.batch_get_image_encodings(tf.expand_dims(images, axis=0)) 
+        else:
+            return cw.batch_get_image_encodings(images)        
