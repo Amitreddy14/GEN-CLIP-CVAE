@@ -13,3 +13,21 @@ class ClipCVAE(tf.keras.Model):
 
     # Dense layer used to shrink the embedding before inputting it in the decoder
     self.embedding_shrinker = tf.keras.layers.Dense(32)
+
+    #First part of the encoder before concatenating the embedding
+    self.encoder_part1= tf.keras.Sequential(
+        [
+            tf.keras.layers.InputLayer(input_shape=self.shape_input, name="encoder_part1_inputlayer"),
+            tf.keras.layers.Conv2D(256, 3, strides=2, padding="same", kernel_initializer=tf.keras.initializers.HeNormal(), name="conv2d1"),
+            tf.keras.layers.BatchNormalization(),
+            tf.keras.layers.LeakyReLU(),
+            tf.keras.layers.Conv2D(256,5, strides=2, padding="same", kernel_initializer=tf.keras.initializers.HeNormal(), name="conv2d2"),
+            tf.keras.layers.BatchNormalization(),
+            tf.keras.layers.LeakyReLU(),
+            tf.keras.layers.Conv2D(128, 3, strides=2, padding="same", kernel_initializer=tf.keras.initializers.HeNormal(), name="conv2d3"),
+            tf.keras.layers.BatchNormalization(),
+            tf.keras.layers.LeakyReLU(),
+            tf.keras.layers.Conv2D(128, 3, strides=2, padding="same", kernel_initializer=tf.keras.initializers.HeNormal(), name="conv2d4"),
+            tf.keras.layers.BatchNormalization(),
+            tf.keras.layers.LeakyReLU(),
+            tf.keras.layers.Flatten()])
