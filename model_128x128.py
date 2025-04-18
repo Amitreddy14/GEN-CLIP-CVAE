@@ -127,3 +127,11 @@ class ClipCVAE(tf.keras.Model):
     reconstruction, mu, logv = self(data, training=False)
     loss = self.compute_loss(data, reconstruction, logv, mu)
     return {'valid loss': loss}
+  
+  def show_image(self, capt):
+    z = tf.random.normal(shape=[1, self.latent_dim])
+    encoding = clip_wrapper.get_text_encoding(capt)
+    encoding = self.embedding_shrinker(encoding)
+    z = tf.concat([z, encoding], axis=-1)
+    img = self.decoder(z).numpy()[0]
+    plt.imshow(img)
