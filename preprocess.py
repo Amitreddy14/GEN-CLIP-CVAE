@@ -74,4 +74,11 @@ def load_coco_data(image_directory, captions_file, is_small: bool):
         clip_im_embeddings.set_shape((1, 512))
         return images, clip_im_embeddings, captions
 
-    dataset = dataset.map(tf_py_function_clip_im_embeddings)            
+    dataset = dataset.map(tf_py_function_clip_im_embeddings)
+
+    def get_clip_text_embeddings(captions):
+        # If single image
+        token_list = []
+        for i in range(captions.shape[0]):
+            token_list += [captions[i].cpu().numpy().decode()]
+        return cw.get_text_encoding(token_list)            
