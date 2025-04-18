@@ -72,4 +72,6 @@ def load_coco_data(image_directory, captions_file, is_small: bool):
     def tf_py_function_clip_im_embeddings(images, captions):
         clip_im_embeddings = tf.py_function(get_clip_im_embeddings, [images], tf.float32)
         clip_im_embeddings.set_shape((1, 512))
-        return images, clip_im_embeddings, captions            
+        return images, clip_im_embeddings, captions
+
+    dataset = dataset.map(tf_py_function_clip_im_embeddings)            
