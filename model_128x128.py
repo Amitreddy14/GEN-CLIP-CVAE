@@ -112,3 +112,12 @@ class ClipCVAE(tf.keras.Model):
     res = self.decoder(z_w_embedding)
 
     return res, mu, logv
+  
+  #Called when .fit is called
+  def train_step(self, data):
+      with tf.GradientTape() as tape:
+          reconstruction, mu, logv = self(data, training=True)
+          loss = self.compute_loss(data, reconstruction, logv, mu)
+      grads = tape.gradient(loss, self.trainable_variables)
+      self.optimizer.apply_gradients(zip(grads, self.trainable_variables))
+      return {'train loss': loss}
