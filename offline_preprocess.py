@@ -43,4 +43,8 @@ def load_coco_data(image_directory, captions_file):
     dest = os.path.join(image_directory, "../train_offline_preprocess")
     for tbm in to_be_moved:
        shutil.copyfile(tbm, os.path.join(dest, tbm.split("/")[-1]))
-    print("Done!")    
+    print("Done!")
+
+img_dir = "/Volumes/Ayman Portable SSD/Documents/Coding Stuff/CS-Brown/cs1470/final-project/datasets/train2017"
+anno_dir = "/Volumes/Ayman Portable SSD/Documents/Coding Stuff/CS-Brown/cs1470/final-project/datasets/annotations/captions_train2017.json"
+load_coco_data(img_dir, anno_dir)        
