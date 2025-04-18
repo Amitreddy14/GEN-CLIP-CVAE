@@ -23,3 +23,9 @@ def load_coco_data(image_directory, captions_file):
     toks = ["cow", "sheep", "cows", "sheeps"]
 
     print("huh?")
+
+    # Initialize COCO with annotations
+    coco_captions = COCO(captions_file)
+
+    # Get image IDs
+    image_ids = coco_captions.getImgIds()
