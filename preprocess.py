@@ -47,4 +47,11 @@ def load_coco_data(image_directory, captions_file, is_small: bool):
         lambda: filepaths_and_captions,
         output_types=(tf.string, tf.string),
         output_shapes=(tf.TensorShape([]), tf.TensorShape([None]))
-    )        
+    )
+
+    def load_and_preprocess_image(path, captions):
+       image = tf.io.read_file(path)
+       image = tf.image.decode_jpeg(image, channels=3)
+       image = tf.image.resize(image, [224, 224])
+       image = image / 255.0
+       return image, captions        
