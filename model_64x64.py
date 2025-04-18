@@ -125,3 +125,9 @@ class ClipCVAE(tf.keras.Model):
       grads = tape.gradient(loss, self.trainable_variables)
       self.optimizer.apply_gradients(zip(grads, self.trainable_variables))
       return {'train loss': loss}
+  
+  # Called at each epoch when .fit is called
+  def test_step(self, data):
+    reconstruction, mu, logv = self(data, training=False)
+    loss = self.compute_loss(data, reconstruction, logv, mu)
+    return {'valid loss': loss}
