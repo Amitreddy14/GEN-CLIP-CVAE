@@ -98,4 +98,12 @@ def load_coco_data(image_directory, captions_file, is_small: bool):
 
     def tf_py_function_tokens(images, clip_im_embeds, captions, clip_txt_embeds):
         tokens = tf.py_function(get_tokens, [captions], tf.float32)
-        return images, clip_im_embeds, captions, clip_txt_embeds, tokens      
+        return images, clip_im_embeds, captions, clip_txt_embeds, tokens   
+
+    dataset = dataset.map(tf_py_function_tokens)
+
+    train_dataset = dataset.take(train_size)
+    valid_dataset = dataset.skip(train_size)
+
+    print("\nSuccessfully initialized!")
+    return train_dataset, valid_dataset   
