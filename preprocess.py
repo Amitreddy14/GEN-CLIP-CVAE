@@ -106,4 +106,9 @@ def load_coco_data(image_directory, captions_file, is_small: bool):
     valid_dataset = dataset.skip(train_size)
 
     print("\nSuccessfully initialized!")
-    return train_dataset, valid_dataset   
+    return train_dataset, valid_dataset
+
+def get_64x64_images(dataset):
+    def resize(image, clip_im_embeds, captions, clip_txt_embeds, tokens):
+        return tf.image.resize(image, [64, 64])
+    return dataset.map(resize)   
